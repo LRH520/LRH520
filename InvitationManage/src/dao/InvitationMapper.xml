@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.InvitationMapper">
+	<select id="getAll" resultType="invitation">
+		SELECT * from invitation
+		<where>
+			<if test="title!=null and title!=''">
+				and title like '%${title}%'
+			</if>
+		</where>
+
+		ORDER BY id LIMIT #{pageno},#{size}
+	</select>
+	<select id="count" resultType="int">
+		select count(*) from invitation
+	</select>
+	<delete id="del" parameterType="invitation">
+		delete from invitation where id=#{id}
+	</delete>
+	<select id="All" resultType="reply_detail">
+		SELECT * from
+		invitation,reply_detail where invitation.id=reply_detail.invid
+	</select>
+	<insert id="insert" parameterType="reply_detail">
+   insert into reply_detail(invid,content,author,createdate) values (#{invid},#{content},#{author},#{createdate})
+	</insert>
+</mapper>
