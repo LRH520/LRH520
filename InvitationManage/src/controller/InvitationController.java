@@ -36,6 +36,7 @@ public class InvitationController {
 		if (pageIndex < 1) {
 			return "index.jsp";
 		} else {
+			System.out.println("111");
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("pageno", (pageIndex - 1) * 2);
 			map.put("size", 2);
